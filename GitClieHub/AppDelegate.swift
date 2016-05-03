@@ -16,6 +16,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        
+        var window: UIWindow?
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        let flowNavigator = FlowNavigatorController()
+        flowNavigator.start(window)
+        
+        
         return true
     }
 
