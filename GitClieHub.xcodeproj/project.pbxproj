@@ -17,6 +17,9 @@
 		98E0EC871CD8F16D008E2B12 /* GitClieHubUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E0EC861CD8F16D008E2B12 /* GitClieHubUITests.swift */; };
 		98E0ECA41CD90136008E2B12 /* FlowNavigatorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E0ECA31CD90136008E2B12 /* FlowNavigatorController.swift */; };
 		98E0ECA61CD901F6008E2B12 /* FlowDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E0ECA51CD901F6008E2B12 /* FlowDelegate.swift */; };
+		98E0ECAC1CD90780008E2B12 /* UserUseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E0ECAB1CD90780008E2B12 /* UserUseCases.swift */; };
+		98E0ECB01CD9084C008E2B12 /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E0ECAF1CD9084C008E2B12 /* NetworkRequest.swift */; };
+		98E0ECB21CD90874008E2B12 /* GithubRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 98E0ECB11CD90874008E2B12 /* GithubRouter.swift */; };
 		AE953A1DD29928AC68E5FBF1 /* Pods_GitClieHubTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB0BBD0D71A657F2969B9B55 /* Pods_GitClieHubTests.framework */; };
 		BD848303AE09370205F2EB48 /* Pods_GitClieHub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 08F1D7D83B010B5AB3313870 /* Pods_GitClieHub.framework */; };
 /* End PBXBuildFile section */
@@ -59,6 +62,9 @@
 		98E0EC881CD8F16D008E2B12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		98E0ECA31CD90136008E2B12 /* FlowNavigatorController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowNavigatorController.swift; sourceTree = "<group>"; };
 		98E0ECA51CD901F6008E2B12 /* FlowDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowDelegate.swift; sourceTree = "<group>"; };
+		98E0ECAB1CD90780008E2B12 /* UserUseCases.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserUseCases.swift; sourceTree = "<group>"; };
+		98E0ECAF1CD9084C008E2B12 /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		98E0ECB11CD90874008E2B12 /* GithubRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubRouter.swift; sourceTree = "<group>"; };
 		AB0BBD0D71A657F2969B9B55 /* Pods_GitClieHubTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GitClieHubTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD67881F9193C9BAD557C756 /* Pods-GitClieHubUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitClieHubUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GitClieHubUITests/Pods-GitClieHubUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E01FB020000C388F42873E4C /* Pods-GitClieHubUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GitClieHubUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-GitClieHubUITests/Pods-GitClieHubUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -141,6 +147,7 @@
 		98E0EC651CD8F16D008E2B12 /* GitClieHub */ = {
 			isa = PBXGroup;
 			children = (
+				98E0ECAD1CD90826008E2B12 /* Common */,
 				98E0ECA21CD900EC008E2B12 /* Navigation */,
 				98E0EC9E1CD8F3A4008E2B12 /* Data */,
 				98E0EC941CD8F1BE008E2B12 /* Modules */,
@@ -210,6 +217,8 @@
 		98E0EC981CD8F29D008E2B12 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				98E0ECAA1CD9068C008E2B12 /* Interactor/UseCase */,
+				98E0ECA91CD90680008E2B12 /* ModuleObjects/Entities */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -217,6 +226,8 @@
 		98E0EC9A1CD8F2CA008E2B12 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				98E0ECA81CD9064A008E2B12 /* View */,
+				98E0ECA71CD90636008E2B12 /* Presenter */,
 			);
 			name = Presentation;
 			sourceTree = "<group>";
@@ -273,6 +284,52 @@
 				98E0ECA51CD901F6008E2B12 /* FlowDelegate.swift */,
 			);
 			name = Navigation;
+			sourceTree = "<group>";
+		};
+		98E0ECA71CD90636008E2B12 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Presenter;
+			sourceTree = "<group>";
+		};
+		98E0ECA81CD9064A008E2B12 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		98E0ECA91CD90680008E2B12 /* ModuleObjects/Entities */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ModuleObjects/Entities;
+			sourceTree = "<group>";
+		};
+		98E0ECAA1CD9068C008E2B12 /* Interactor/UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				98E0ECAB1CD90780008E2B12 /* UserUseCases.swift */,
+			);
+			name = Interactor/UseCase;
+			sourceTree = "<group>";
+		};
+		98E0ECAD1CD90826008E2B12 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				98E0ECAE1CD9082E008E2B12 /* Network */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		98E0ECAE1CD9082E008E2B12 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				98E0ECAF1CD9084C008E2B12 /* NetworkRequest.swift */,
+				98E0ECB11CD90874008E2B12 /* GithubRouter.swift */,
+			);
+			name = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -541,6 +598,9 @@
 				98E0ECA41CD90136008E2B12 /* FlowNavigatorController.swift in Sources */,
 				98E0EC691CD8F16D008E2B12 /* ViewController.swift in Sources */,
 				98E0EC671CD8F16D008E2B12 /* AppDelegate.swift in Sources */,
+				98E0ECB21CD90874008E2B12 /* GithubRouter.swift in Sources */,
+				98E0ECB01CD9084C008E2B12 /* NetworkRequest.swift in Sources */,
+				98E0ECAC1CD90780008E2B12 /* UserUseCases.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
