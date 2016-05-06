@@ -10,46 +10,71 @@ import UIKit
 import Foundation
 import Alamofire
 
+// https://github.com/Alamofire/Alamofire#crud--authorization
+// http://stackoverflow.com/questions/28333241/proper-usage-of-the-alamofires-urlrequestconvertible
+
+
 struct Github {
-    enum Router : URLRequestConvertible {
+
+    enum Router: URLRequestConvertible {
+        static let baseURLString = "http://example.com"
+        static var OAuthToken: String?
         
-        case SearchCategory
+        case CreateUser([String: AnyObject])
+        case ReadUser(String)
+        case UpdateUser(String, [String: AnyObject])
+        case DestroyUser(String)
         
         var method: Alamofire.Method {
             switch self {
-            case .SearchCategory:
+            case .CreateUser:
                 return .POST
-            default:
+            case .ReadUser:
                 return .GET
-                
+            case .UpdateUser:
+                return .PUT
+            case .DestroyUser:
+                return .DELETE
             }
-            
         }
+        
+        var path: String {
+            switch self {
+            case .CreateUser:
+                return "/users"
+            case .ReadUser(let username):
+                return "/users/\(username)"
+            case .UpdateUser(let username, _):
+                return "/users/\(username)"
+            case .DestroyUser(let username):
+                return "/users/\(username)"
+            }
+        }
+        
+        // MARK: URLRequestConvertible
         
         var URLRequest: NSMutableURLRequest {
+            let URL = NSURL(string: Router.baseURLString)!
+            let mutableURLRequest = NSMutableURLRequest(URL: URL.URLByAppendingPathComponent(path))
+            mutableURLRequest.HTTPMethod = method.rawValue
             
-            let (path, parameters): (String, [String: AnyObject]) = {
-                
-                switch self {
-                case .SearchCategory:
-                    let params = [String: AnyObject]() // empty dictionary
-                    return ("/servicecategory", params)
-                    
-                }
-            }()
-        }
-        
-        //let URLRequest = NSMutableURLRequest(URL: URL!.URLByAppendingPathComponent(path)) //?
-        //URLRequest.HTTPMethod = method.rawValue
-        
-        //let encoding = Alamofire.ParameterEncoding.URL //?
-        
-        switch self {
-//            case .SearchCategory(_): //post ...
-//                return Alamofire.ParameterEncoding.JSON.encode(URLRequest, parameters: parameters).0
+            if let token = Router.OAuthToken {
+                mutableURLRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+            }
+            
+            switch self {
+            case .CreateUser(let parameters):
+                return Alamofire.ParameterEncoding.JSON.encode(mutableURLRequest, parameters: parameters).0
+            case .UpdateUser(_, let parameters):
+                return Alamofire.ParameterEncoding.URL.encode(mutableURLRequest, parameters: parameters).0
             default:
-                return encoding.encode(URLRequest, parameters: parameters).0 // get requests..
+                return mutableURLRequest
+            }
         }
         
+        
+
+        
+    }
 
 }

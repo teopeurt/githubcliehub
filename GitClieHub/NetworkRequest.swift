@@ -19,7 +19,7 @@ class NetworkRequest: NSObject {
         return Promise { fulfill, reject in
             
             
-            let request = Alamofire.request(HiHo.Router.SearchCategory)
+            let request = Alamofire.request(Github.Router.ReadUser(""))
             
             request.responseJSON{ (response) in
                 
@@ -33,6 +33,7 @@ class NetworkRequest: NSObject {
                 if(statusCode < 200 || statusCode > 299) {
                     
                     return reject(NSError(domain: "domain", code: statusCode!, userInfo: [:]))
+                    
                 }
                 
                 do {
@@ -40,7 +41,9 @@ class NetworkRequest: NSObject {
                     
                     fulfill(result)
                 }catch {
+                    
                     return reject(NSError(domain:"hiho", code: statusCode!, userInfo: [NSLocalizedDescriptionKey:"Cant convert to a json object"]))
+                    
                 }
             }
         }
